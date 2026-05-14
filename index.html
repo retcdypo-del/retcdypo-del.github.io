@@ -12,7 +12,7 @@
         header .cart-btn { background: white; color: #4a6741; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; font-size: 16px; position: relative; }
         header .cart-count { background: red; color: white; border-radius: 50%; padding: 2px 7px; font-size: 12px; position: absolute; top: -8px; right: -8px; }
         nav { background: #3d5636; padding: 10px; text-align: center; }
-        nav a { color: white; text-decoration: none; margin: 0 12px; font-size: 14px; }
+        nav a { color: white; text-decoration: none; margin: 0 12px; font-size: 14px; cursor: pointer; }
         nav a:hover { text-decoration: underline; }
         .hero { background: linear-gradient(135deg, #e8f0e4, #d0e0cc); padding: 40px 20px; text-align: center; }
         .hero h2 { font-size: 28px; margin-bottom: 10px; }
@@ -25,8 +25,6 @@
         .filter-group { flex: 1; min-width: 150px; }
         .filter-group label { display: block; font-size: 13px; margin-bottom: 5px; font-weight: bold; }
         .filter-group select, .filter-group input { width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 5px; font-size: 14px; }
-        .price-slider { display: flex; gap: 10px; align-items: center; }
-        .price-slider input { width: 80px; }
         .news-block { background: white; padding: 20px; border-radius: 8px; margin-bottom: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
         .news-block h3 { color: #4a6741; margin-bottom: 10px; }
         .news-block .news-item { padding: 8px 0; border-bottom: 1px solid #eee; font-size: 14px; }
@@ -48,15 +46,16 @@
         footer h4 { color: white; margin-bottom: 10px; }
         footer p, footer a { font-size: 13px; color: #aaa; text-decoration: none; }
         .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000; }
-        .modal-content { background: white; margin: 10% auto; padding: 30px; border-radius: 10px; max-width: 600px; max-height: 80vh; overflow-y: auto; position: relative; }
-        .modal .close { position: absolute; top: 15px; right: 20px; font-size: 24px; cursor: pointer; }
-        .cart-item { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #eee; }
-        .cart-item button { background: red; color: white; border: none; padding: 5px 10px; border-radius: 3px; cursor: pointer; }
+        .modal-content { background: white; margin: 5% auto; padding: 30px; border-radius: 10px; max-width: 600px; max-height: 85vh; overflow-y: auto; position: relative; }
+        .modal .close { position: absolute; top: 15px; right: 20px; font-size: 28px; cursor: pointer; color: #333; }
+        .cart-item { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid #eee; }
+        .cart-item button { background: #e74c3c; color: white; border: none; padding: 5px 10px; border-radius: 3px; cursor: pointer; }
         .order-form input, .order-form textarea, .order-form select { width: 100%; padding: 10px; margin-bottom: 12px; border: 1px solid #ddd; border-radius: 5px; font-size: 14px; }
         .order-form button { width: 100%; padding: 12px; font-size: 16px; }
         .admin-form input { width: 100%; padding: 10px; margin-bottom: 10px; border: 1px solid #ddd; border-radius: 5px; }
         .order-card { background: #f9f9f9; padding: 15px; border-radius: 5px; margin-bottom: 10px; border-left: 4px solid #4a6741; }
-        .order-card .status { font-weight: bold; }
+        .order-card .status { font-weight: bold; color: #4a6741; }
+        .status-select { padding: 5px; border-radius: 3px; border: 1px solid #ddd; }
         @media (max-width: 600px) { .products { grid-template-columns: 1fr 1fr; } header h1 { font-size: 18px; } }
     </style>
 </head>
@@ -68,13 +67,13 @@
 </header>
 
 <nav>
-    <a href="#" onclick="scrollToSection('catalog')">Каталог</a>
-    <a href="#" onclick="scrollToSection('filters')">Фильтры</a>
-    <a href="#" onclick="scrollToSection('news')">Новости</a>
-    <a href="#" onclick="scrollToSection('order-form-section')">Заказать услугу</a>
-    <a href="#" onclick="scrollToSection('feedback')">Обратная связь</a>
-    <a href="#" onclick="scrollToSection('contacts')">Контакты</a>
-    <a href="#" onclick="openAdminLogin()">🔒 Админ</a>
+    <a onclick="document.getElementById('catalog').scrollIntoView({behavior:'smooth'})">Каталог</a>
+    <a onclick="document.getElementById('filters').scrollIntoView({behavior:'smooth'})">Фильтры</a>
+    <a onclick="document.getElementById('news').scrollIntoView({behavior:'smooth'})">Новости</a>
+    <a onclick="document.getElementById('order-form-section').scrollIntoView({behavior:'smooth'})">Заказать услугу</a>
+    <a onclick="document.getElementById('feedback').scrollIntoView({behavior:'smooth'})">Обратная связь</a>
+    <a onclick="document.getElementById('contacts').scrollIntoView({behavior:'smooth'})">Контакты</a>
+    <a onclick="openAdminLogin()">🔒 Админ</a>
 </nav>
 
 <section class="hero">
@@ -84,7 +83,6 @@
 
 <div class="container">
 
-    <!-- Новости -->
     <div class="news-block" id="news">
         <h3>📢 Новости и акции</h3>
         <div class="news-item"><span class="news-date">15.05.2026</span> — Скидка 20% на все контейнеры до конца месяца!</div>
@@ -92,7 +90,6 @@
         <div class="news-item"><span class="news-date">01.05.2026</span> — Бесплатная доставка при заказе от 3000 ₽.</div>
     </div>
 
-    <!-- Фильтры -->
     <div class="filters" id="filters">
         <h3>🔍 Фильтры и поиск</h3>
         <div class="filter-row">
@@ -111,17 +108,6 @@
                 </select>
             </div>
             <div class="filter-group">
-                <label>Объём</label>
-                <select id="filterVolume" onchange="renderProducts()">
-                    <option value="all">Все</option>
-                    <option value="0.5">0.5 л</option>
-                    <option value="1">1 л</option>
-                    <option value="2">2 л</option>
-                    <option value="3">3 л</option>
-                    <option value="5">5 л</option>
-                </select>
-            </div>
-            <div class="filter-group">
                 <label>Производитель</label>
                 <select id="filterBrand" onchange="renderProducts()">
                     <option value="all">Все</option>
@@ -132,21 +118,19 @@
                 </select>
             </div>
             <div class="filter-group">
-                <label>Цена от</label>
+                <label>Цена от (₽)</label>
                 <input type="number" id="priceMin" placeholder="0" oninput="renderProducts()">
             </div>
             <div class="filter-group">
-                <label>Цена до</label>
+                <label>Цена до (₽)</label>
                 <input type="number" id="priceMax" placeholder="5000" oninput="renderProducts()">
             </div>
         </div>
     </div>
 
-    <!-- Каталог -->
     <h2 id="catalog">Товары (<span id="productCount">30</span>)</h2>
     <div class="products" id="productsContainer"></div>
 
-    <!-- Форма заказа услуги -->
     <div class="filters" id="order-form-section" style="margin-top:30px">
         <h3>📋 Заказать услугу / Запись на приём</h3>
         <form class="order-form" onsubmit="submitService(event)">
@@ -163,7 +147,6 @@
         </form>
     </div>
 
-    <!-- Обратная связь -->
     <div class="filters" id="feedback" style="margin-top:30px">
         <h3>💬 Обратная связь</h3>
         <form class="order-form" onsubmit="submitFeedback(event)">
@@ -204,7 +187,7 @@
     <p style="margin-top:20px">© 2026 ЧистоДом. Все права защищены.</p>
 </footer>
 
-<!-- Модальное окно корзины -->
+<!-- Корзина -->
 <div class="modal" id="cartModal">
     <div class="modal-content">
         <span class="close" onclick="closeCart()">×</span>
@@ -215,7 +198,7 @@
     </div>
 </div>
 
-<!-- Модальное окно оформления заказа -->
+<!-- Оформление -->
 <div class="modal" id="checkoutModal">
     <div class="modal-content">
         <span class="close" onclick="closeCheckout()">×</span>
@@ -232,7 +215,7 @@
     </div>
 </div>
 
-<!-- Модальное окно админа -->
+<!-- Админ -->
 <div class="modal" id="adminLoginModal">
     <div class="modal-content">
         <span class="close" onclick="closeAdminLogin()">×</span>
@@ -244,68 +227,65 @@
     </div>
 </div>
 
-<!-- Модальное окно панели админа -->
 <div class="modal" id="adminPanelModal">
     <div class="modal-content" style="max-width:800px">
         <span class="close" onclick="closeAdminPanel()">×</span>
         <h2>📊 Панель администратора</h2>
-        <h3 style="margin-top:15px">Заказы</h3>
+        <button class="btn" onclick="exportData()" style="margin:10px 0">📥 Скачать все заказы</button>
+        <h3 style="margin-top:15px">🛍 Заказы</h3>
         <div id="adminOrders"><p>Заказов пока нет</p></div>
-        <h3 style="margin-top:15px">Заявки на услуги</h3>
+        <h3 style="margin-top:15px">📋 Заявки на услуги</h3>
         <div id="adminServices"><p>Заявок пока нет</p></div>
-        <h3 style="margin-top:15px">Сообщения обратной связи</h3>
+        <h3 style="margin-top:15px">💬 Сообщения</h3>
         <div id="adminFeedback"><p>Сообщений пока нет</p></div>
     </div>
 </div>
 
 <script>
-// ===== ДАННЫЕ ТОВАРОВ =====
+// ===== ТОВАРЫ (30 шт) =====
 const products = [
-    { id:1, name:"Контейнер 0.5 л", category:"Кухня", price:200, oldPrice:250, volume:"0.5", brand:"ХозПром", img:"https://placehold.co/300x200/e8e8e8/666?text=Контейнер+0.5л", popular:0 },
-    { id:2, name:"Контейнер 1 л", category:"Кухня", price:350, oldPrice:400, volume:"1", brand:"ХозПром", img:"https://placehold.co/300x200/e8e8e8/666?text=Контейнер+1л", popular:0 },
-    { id:3, name:"Контейнер 2 л", category:"Кухня", price:450, oldPrice:null, volume:"2", brand:"ЧистоПласт", img:"https://placehold.co/300x200/e8e8e8/666?text=Контейнер+2л", popular:0 },
-    { id:4, name:"Контейнер 3 л", category:"Кухня", price:550, oldPrice:600, volume:"3", brand:"ЧистоПласт", img:"https://placehold.co/300x200/e8e8e8/666?text=Контейнер+3л", popular:0 },
-    { id:5, name:"Контейнер 5 л", category:"Хранение", price:750, oldPrice:null, volume:"5", brand:"ДомСтандарт", img:"https://placehold.co/300x200/e8e8e8/666?text=Контейнер+5л", popular:0 },
-    { id:6, name:"Банка стеклянная 0.5 л", category:"Кухня", price:180, oldPrice:220, volume:"0.5", brand:"ЭкоБыт", img:"https://placehold.co/300x200/e8e8e8/666?text=Банка+0.5л", popular:0 },
-    { id:7, name:"Банка стеклянная 1 л", category:"Кухня", price:250, oldPrice:null, volume:"1", brand:"ЭкоБыт", img:"https://placehold.co/300x200/e8e8e8/666?text=Банка+1л", popular:0 },
-    { id:8, name:"Банка стеклянная 2 л", category:"Хранение", price:350, oldPrice:400, volume:"2", brand:"ЭкоБыт", img:"https://placehold.co/300x200/e8e8e8/666?text=Банка+2л", popular:0 },
-    { id:9, name:"Органайзер для ящика", category:"Кухня", price:420, oldPrice:null, volume:"all", brand:"ХозПром", img:"https://placehold.co/300x200/e8e8e8/666?text=Органайзер", popular:0 },
-    { id:10, name:"Органайзер для столовых приборов", category:"Кухня", price:380, oldPrice:450, volume:"all", brand:"ДомСтандарт", img:"https://placehold.co/300x200/e8e8e8/666?text=Органайзер+приборы", popular:0 },
-    { id:11, name:"Разделитель для полки", category:"Хранение", price:290, oldPrice:null, volume:"all", brand:"ХозПром", img:"https://placehold.co/300x200/e8e8e8/666?text=Разделитель", popular:0 },
-    { id:12, name:"Полка навесная", category:"Ванная", price:650, oldPrice:750, volume:"all", brand:"ДомСтандарт", img:"https://placehold.co/300x200/e8e8e8/666?text=Полка", popular:0 },
-    { id:13, name:"Дозатор для мыла", category:"Ванная", price:890, oldPrice:null, volume:"0.5", brand:"ЭкоБыт", img:"https://placehold.co/300x200/e8e8e8/666?text=Дозатор", popular:0 },
-    { id:14, name:"Дозатор для шампуня", category:"Ванная", price:750, oldPrice:850, volume:"0.5", brand:"ЧистоПласт", img:"https://placehold.co/300x200/e8e8e8/666?text=Дозатор+шампунь", popular:0 },
-    { id:15, name:"Коврик для ванной", category:"Ванная", price:1200, oldPrice:null, volume:"all", brand:"ДомСтандарт", img:"https://placehold.co/300x200/e8e8e8/666?text=Коврик", popular:0 },
-    { id:16, name:"Шторка для ванной", category:"Ванная", price:950, oldPrice:1100, volume:"all", brand:"ДомСтандарт", img:"https://placehold.co/300x200/e8e8e8/666?text=Шторка", popular:0 },
-    { id:17, name:"Корзина для белья", category:"Ванная", price:1500, oldPrice:null, volume:"all", brand:"ЧистоПласт", img:"https://placehold.co/300x200/e8e8e8/666?text=Корзина", popular:0 },
-    { id:18, name:"Швабра отжимная", category:"Уборка", price:1490, oldPrice:1700, volume:"all", brand:"ХозПром", img:"https://placehold.co/300x200/e8e8e8/666?text=Швабра", popular:0 },
-    { id:19, name:"Швабра плоская", category:"Уборка", price:890, oldPrice:null, volume:"all", brand:"ЧистоПласт", img:"https://placehold.co/300x200/e8e8e8/666?text=Швабра+плоская", popular:0 },
-    { id:20, name:"Ведро 5 л", category:"Уборка", price:450, oldPrice:500, volume:"5", brand:"ХозПром", img:"https://placehold.co/300x200/e8e8e8/666?text=Ведро+5л", popular:0 },
-    { id:21, name:"Ведро 10 л", category:"Уборка", price:650, oldPrice:null, volume:"5", brand:"ДомСтандарт", img:"https://placehold.co/300x200/e8e8e8/666?text=Ведро+10л", popular:0 },
-    { id:22, name:"Средство для пола", category:"Уборка", price:320, oldPrice:380, volume:"1", brand:"ЭкоБыт", img:"https://placehold.co/300x200/e8e8e8/666?text=Средство+пол", popular:0 },
-    { id:23, name:"Средство для окон", category:"Уборка", price:280, oldPrice:null, volume:"0.5", brand:"ЭкоБыт", img:"https://placehold.co/300x200/e8e8e8/666?text=Средство+окна", popular:0 },
-    { id:24, name:"Салфетки универсальные", category:"Уборка", price:150, oldPrice:200, volume:"all", brand:"ЧистоПласт", img:"https://placehold.co/300x200/e8e8e8/666?text=Салфетки", popular:0 },
-    { id:25, name:"Губки для посуды (набор 5 шт)", category:"Кухня", price:120, oldPrice:null, volume:"all", brand:"ХозПром", img:"https://placehold.co/300x200/e8e8e8/666?text=Губки", popular:0 },
-    { id:26, name:"Вакуумные пакеты 3 шт", category:"Хранение", price:550, oldPrice:650, volume:"all", brand:"ДомСтандарт", img:"https://placehold.co/300x200/e8e8e8/666?text=Вакуум+пакеты", popular:0 },
-    { id:27, name:"Бокс для хранения 30 л", category:"Хранение", price:950, oldPrice:null, volume:"5", brand:"ЧистоПласт", img:"https://placehold.co/300x200/e8e8e8/666?text=Бокс+30л", popular:0 },
-    { id:28, name:"Корзина плетёная", category:"Хранение", price:780, oldPrice:900, volume:"all", brand:"ЭкоБыт", img:"https://placehold.co/300x200/e8e8e8/666?text=Корзина+плетеная", popular:0 },
-    { id:29, name:"Полотенце кухонное", category:"Кухня", price:350, oldPrice:null, volume:"all", brand:"ДомСтандарт", img:"https://placehold.co/300x200/e8e8e8/666?text=Полотенце", popular:0 },
-    { id:30, name:"Прихватка силиконовая", category:"Кухня", price:220, oldPrice:280, volume:"all", brand:"ХозПром", img:"https://placehold.co/300x200/e8e8e8/666?text=Прихватка", popular:0 }
+    { id:1, name:"Контейнер 0.5 л", category:"Кухня", price:200, oldPrice:250, brand:"ХозПром", img:"https://placehold.co/300x200/e8e8e8/666?text=Контейнер+0.5л" },
+    { id:2, name:"Контейнер 1 л", category:"Кухня", price:350, oldPrice:400, brand:"ХозПром", img:"https://placehold.co/300x200/e8e8e8/666?text=Контейнер+1л" },
+    { id:3, name:"Контейнер 2 л", category:"Кухня", price:450, oldPrice:null, brand:"ЧистоПласт", img:"https://placehold.co/300x200/e8e8e8/666?text=Контейнер+2л" },
+    { id:4, name:"Контейнер 3 л", category:"Кухня", price:550, oldPrice:600, brand:"ЧистоПласт", img:"https://placehold.co/300x200/e8e8e8/666?text=Контейнер+3л" },
+    { id:5, name:"Контейнер 5 л", category:"Хранение", price:750, oldPrice:null, brand:"ДомСтандарт", img:"https://placehold.co/300x200/e8e8e8/666?text=Контейнер+5л" },
+    { id:6, name:"Банка стеклянная 0.5 л", category:"Кухня", price:180, oldPrice:220, brand:"ЭкоБыт", img:"https://placehold.co/300x200/e8e8e8/666?text=Банка+0.5л" },
+    { id:7, name:"Банка стеклянная 1 л", category:"Кухня", price:250, oldPrice:null, brand:"ЭкоБыт", img:"https://placehold.co/300x200/e8e8e8/666?text=Банка+1л" },
+    { id:8, name:"Банка стеклянная 2 л", category:"Хранение", price:350, oldPrice:400, brand:"ЭкоБыт", img:"https://placehold.co/300x200/e8e8e8/666?text=Банка+2л" },
+    { id:9, name:"Органайзер для ящика", category:"Кухня", price:420, oldPrice:null, brand:"ХозПром", img:"https://placehold.co/300x200/e8e8e8/666?text=Органайзер" },
+    { id:10, name:"Органайзер для приборов", category:"Кухня", price:380, oldPrice:450, brand:"ДомСтандарт", img:"https://placehold.co/300x200/e8e8e8/666?text=Органайзер+приборы" },
+    { id:11, name:"Разделитель для полки", category:"Хранение", price:290, oldPrice:null, brand:"ХозПром", img:"https://placehold.co/300x200/e8e8e8/666?text=Разделитель" },
+    { id:12, name:"Полка навесная", category:"Ванная", price:650, oldPrice:750, brand:"ДомСтандарт", img:"https://placehold.co/300x200/e8e8e8/666?text=Полка" },
+    { id:13, name:"Дозатор для мыла", category:"Ванная", price:890, oldPrice:null, brand:"ЭкоБыт", img:"https://placehold.co/300x200/e8e8e8/666?text=Дозатор" },
+    { id:14, name:"Дозатор для шампуня", category:"Ванная", price:750, oldPrice:850, brand:"ЧистоПласт", img:"https://placehold.co/300x200/e8e8e8/666?text=Дозатор+шампунь" },
+    { id:15, name:"Коврик для ванной", category:"Ванная", price:1200, oldPrice:null, brand:"ДомСтандарт", img:"https://placehold.co/300x200/e8e8e8/666?text=Коврик" },
+    { id:16, name:"Шторка для ванной", category:"Ванная", price:950, oldPrice:1100, brand:"ДомСтандарт", img:"https://placehold.co/300x200/e8e8e8/666?text=Шторка" },
+    { id:17, name:"Корзина для белья", category:"Ванная", price:1500, oldPrice:null, brand:"ЧистоПласт", img:"https://placehold.co/300x200/e8e8e8/666?text=Корзина" },
+    { id:18, name:"Швабра отжимная", category:"Уборка", price:1490, oldPrice:1700, brand:"ХозПром", img:"https://placehold.co/300x200/e8e8e8/666?text=Швабра" },
+    { id:19, name:"Швабра плоская", category:"Уборка", price:890, oldPrice:null, brand:"ЧистоПласт", img:"https://placehold.co/300x200/e8e8e8/666?text=Швабра+плоская" },
+    { id:20, name:"Ведро 5 л", category:"Уборка", price:450, oldPrice:500, brand:"ХозПром", img:"https://placehold.co/300x200/e8e8e8/666?text=Ведро+5л" },
+    { id:21, name:"Ведро 10 л", category:"Уборка", price:650, oldPrice:null, brand:"ДомСтандарт", img:"https://placehold.co/300x200/e8e8e8/666?text=Ведро+10л" },
+    { id:22, name:"Средство для пола", category:"Уборка", price:320, oldPrice:380, brand:"ЭкоБыт", img:"https://placehold.co/300x200/e8e8e8/666?text=Средство+пол" },
+    { id:23, name:"Средство для окон", category:"Уборка", price:280, oldPrice:null, brand:"ЭкоБыт", img:"https://placehold.co/300x200/e8e8e8/666?text=Средство+окна" },
+    { id:24, name:"Салфетки универсальные", category:"Уборка", price:150, oldPrice:200, brand:"ЧистоПласт", img:"https://placehold.co/300x200/e8e8e8/666?text=Салфетки" },
+    { id:25, name:"Губки для посуды (5 шт)", category:"Кухня", price:120, oldPrice:null, brand:"ХозПром", img:"https://placehold.co/300x200/e8e8e8/666?text=Губки" },
+    { id:26, name:"Вакуумные пакеты 3 шт", category:"Хранение", price:550, oldPrice:650, brand:"ДомСтандарт", img:"https://placehold.co/300x200/e8e8e8/666?text=Вакуум+пакеты" },
+    { id:27, name:"Бокс для хранения 30 л", category:"Хранение", price:950, oldPrice:null, brand:"ЧистоПласт", img:"https://placehold.co/300x200/e8e8e8/666?text=Бокс+30л" },
+    { id:28, name:"Корзина плетёная", category:"Хранение", price:780, oldPrice:900, brand:"ЭкоБыт", img:"https://placehold.co/300x200/e8e8e8/666?text=Корзина+плетеная" },
+    { id:29, name:"Полотенце кухонное", category:"Кухня", price:350, oldPrice:null, brand:"ДомСтандарт", img:"https://placehold.co/300x200/e8e8e8/666?text=Полотенце" },
+    { id:30, name:"Прихватка силиконовая", category:"Кухня", price:220, oldPrice:280, brand:"ХозПром", img:"https://placehold.co/300x200/e8e8e8/666?text=Прихватка" }
 ];
 
-// ===== ХРАНИЛИЩЕ =====
 let cart = JSON.parse(localStorage.getItem('cart') || '[]');
 let orders = JSON.parse(localStorage.getItem('orders') || '[]');
 let services = JSON.parse(localStorage.getItem('services') || '[]');
 let feedbacks = JSON.parse(localStorage.getItem('feedbacks') || '[]');
 let populars = JSON.parse(localStorage.getItem('populars') || '{}');
-const ADMIN_PASSWORD = "admin123"; // ПОМЕНЯЙ ПАРОЛЬ ЗДЕСЬ
+const ADMIN_PASSWORD = "admin123";
 
-// ===== РЕНДЕР ТОВАРОВ =====
 function renderProducts() {
     const search = (document.getElementById('searchInput').value || '').toLowerCase();
     const category = document.getElementById('filterCategory').value;
-    const volume = document.getElementById('filterVolume').value;
     const brand = document.getElementById('filterBrand').value;
     const priceMin = parseInt(document.getElementById('priceMin').value) || 0;
     const priceMax = parseInt(document.getElementById('priceMax').value) || 999999;
@@ -313,7 +293,6 @@ function renderProducts() {
     const filtered = products.filter(p => {
         if (search && !p.name.toLowerCase().includes(search) && !p.brand.toLowerCase().includes(search)) return false;
         if (category !== 'all' && p.category !== category) return false;
-        if (volume !== 'all' && p.volume !== volume) return false;
         if (brand !== 'all' && p.brand !== brand) return false;
         if (p.price < priceMin || p.price > priceMax) return false;
         return true;
@@ -321,8 +300,7 @@ function renderProducts() {
 
     document.getElementById('productCount').textContent = filtered.length;
 
-    const container = document.getElementById('productsContainer');
-    container.innerHTML = filtered.map(p => {
+    document.getElementById('productsContainer').innerHTML = filtered.map(p => {
         const discount = p.oldPrice ? Math.round((1 - p.price/p.oldPrice)*100) : 0;
         const pop = populars[p.id] || 0;
         return `
@@ -331,7 +309,7 @@ function renderProducts() {
             ${pop >= 5 ? `<span class="popular-badge">🔥 Популярный</span>` : ''}
             <img src="${p.img}" alt="${p.name}" onerror="this.src='https://placehold.co/300x200/e0e0e0/999?text=Нет+фото'">
             <h3>${p.name}</h3>
-            <p class="props">Объём: ${p.volume === 'all' ? 'не применимо' : p.volume + ' л'} | Производитель: ${p.brand}</p>
+            <p class="props">Производитель: ${p.brand} | Категория: ${p.category}</p>
             ${discount > 0 ? `<p class="old-price">${p.oldPrice} ₽</p>` : ''}
             <p class="price">${p.price} ₽</p>
             <p class="views">👁 ${pop} просмотров</p>
@@ -346,7 +324,6 @@ function trackView(id) {
     renderProducts();
 }
 
-// ===== КОРЗИНА =====
 function addToCart(id) {
     const product = products.find(p => p.id === id);
     const existing = cart.find(i => i.id === id);
@@ -368,7 +345,7 @@ function saveCart() { localStorage.setItem('cart', JSON.stringify(cart)); }
 function updateCartCount() { document.getElementById('cartCount').textContent = cart.reduce((s,i) => s + i.qty, 0); }
 
 function openCart() {
-    const modal = document.getElementById('cartModal');
+    document.getElementById('cartModal').style.display = 'block';
     const itemsDiv = document.getElementById('cartItems');
     if (cart.length === 0) { itemsDiv.innerHTML = '<p>Корзина пуста</p>'; }
     else {
@@ -380,14 +357,13 @@ function openCart() {
             </div>`).join('');
     }
     document.getElementById('cartTotal').textContent = 'Итого: ' + cart.reduce((s,i) => s + i.price*i.qty, 0) + ' ₽';
-    modal.style.display = 'block';
 }
 
 function closeCart() { document.getElementById('cartModal').style.display = 'none'; }
 
 function openCheckout() {
     if (cart.length === 0) { alert('Корзина пуста!'); return; }
-    document.getElementById('cartModal').style.display = 'none';
+    closeCart();
     document.getElementById('checkoutModal').style.display = 'block';
     document.getElementById('orderSummary').textContent = cart.map(i => i.name + ' x' + i.qty).join(', ');
     document.getElementById('orderTotal').textContent = cart.reduce((s,i) => s + i.price*i.qty, 0) + ' ₽';
@@ -404,7 +380,7 @@ function submitOrder(e) {
         phone: document.getElementById('orderPhone').value,
         email: document.getElementById('orderEmail').value,
         address: document.getElementById('orderAddress').value,
-        items: [...cart],
+        items: cart.map(i => ({name: i.name, qty: i.qty, price: i.price})),
         total: cart.reduce((s,i) => s + i.price*i.qty, 0),
         status: 'Новый'
     };
@@ -414,5 +390,116 @@ function submitOrder(e) {
     saveCart();
     updateCartCount();
     closeCheckout();
-    alert('Заказ оформлен! Мы свяжемся с вами.');
-    document.getElementById('
+    alert('✅ Заказ оформлен! Мы свяжемся с вами.');
+}
+
+function submitService(e) {
+    e.preventDefault();
+    services.push({
+        date: new Date().toLocaleString(),
+        name: document.getElementById('serviceName').value,
+        phone: document.getElementById('servicePhone').value,
+        type: document.getElementById('serviceType').value,
+        wishDate: document.getElementById('serviceDate').value,
+        message: document.getElementById('serviceMessage').value,
+        status: 'Новая'
+    });
+    localStorage.setItem('services', JSON.stringify(services));
+    alert('✅ Заявка на услугу отправлена!');
+    e.target.reset();
+}
+
+function submitFeedback(e) {
+    e.preventDefault();
+    feedbacks.push({
+        date: new Date().toLocaleString(),
+        name: document.getElementById('fbName').value,
+        email: document.getElementById('fbEmail').value,
+        message: document.getElementById('fbMessage').value
+    });
+    localStorage.setItem('feedbacks', JSON.stringify(feedbacks));
+    alert('✅ Сообщение отправлено! Спасибо за обратную связь.');
+    e.target.reset();
+}
+
+function openAdminLogin() { document.getElementById('adminLoginModal').style.display = 'block'; }
+function closeAdminLogin() { document.getElementById('adminLoginModal').style.display = 'none'; }
+function closeAdminPanel() { document.getElementById('adminPanelModal').style.display = 'none'; }
+
+function loginAdmin() {
+    if (document.getElementById('adminPassword').value === ADMIN_PASSWORD) {
+        closeAdminLogin();
+        openAdminPanel();
+    } else {
+        alert('❌ Неверный пароль!');
+    }
+}
+
+function openAdminPanel() {
+    document.getElementById('adminPanelModal').style.display = 'block';
+    const oDiv = document.getElementById('adminOrders');
+    const sDiv = document.getElementById('adminServices');
+    const fDiv = document.getElementById('adminFeedback');
+
+    orders = JSON.parse(localStorage.getItem('orders') || '[]');
+    services = JSON.parse(localStorage.getItem('services') || '[]');
+    feedbacks = JSON.parse(localStorage.getItem('feedbacks') || '[]');
+
+    oDiv.innerHTML = orders.length === 0 ? '<p>Заказов пока нет</p>' : orders.map(o => `
+        <div class="order-card">
+            <p><strong>Заказ #${o.id}</strong> от ${o.date}</p>
+            <p>Клиент: ${o.name} | 📞 ${o.phone} | ✉️ ${o.email}</p>
+            <p>Адрес: ${o.address}</p>
+            <p>Товары: ${o.items.map(i => i.name + ' x' + i.qty).join(', ')}</p>
+            <p>Сумма: ${o.total} ₽</p>
+            <p>Статус: <select class="status-select" onchange="updateOrderStatus(${o.id}, this.value)">
+                <option ${o.status==='Новый'?'selected':''}>Новый</option>
+                <option ${o.status==='В обработке'?'selected':''}>В обработке</option>
+                <option ${o.status==='Отправлен'?'selected':''}>Отправлен</option>
+                <option ${o.status==='Выполнен'?'selected':''}>Выполнен</option>
+            </select></p>
+        </div>`).join('');
+
+    sDiv.innerHTML = services.length === 0 ? '<p>Заявок пока нет</p>' : services.map(s => `
+        <div class="order-card">
+            <p><strong>${s.type}</strong> от ${s.date}</p>
+            <p>Клиент: ${s.name} | 📞 ${s.phone}</p>
+            <p>Дата: ${s.wishDate || 'не указана'} | Комментарий: ${s.message || 'нет'}</p>
+            <p>Статус: ${s.status}</p>
+        </div>`).join('');
+
+    fDiv.innerHTML = feedbacks.length === 0 ? '<p>Сообщений пока нет</p>' : feedbacks.map(f => `
+        <div class="order-card">
+            <p><strong>${f.name}</strong> (${f.email}) — ${f.date}</p>
+            <p>${f.message}</p>
+        </div>`).join('');
+}
+
+function updateOrderStatus(id, status) {
+    orders = orders.map(o => o.id === id ? {...o, status} : o);
+    localStorage.setItem('orders', JSON.stringify(orders));
+}
+
+function exportData() {
+    const data = { orders, services, feedbacks };
+    const blob = new Blob([JSON.stringify(data, null, 2)], {type: 'application/json'});
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'chistodom-data.json';
+    a.click();
+}
+
+// Закрытие модалок по клику вне
+window.onclick = function(e) {
+    if (e.target.className === 'modal') {
+        e.target.style.display = 'none';
+    }
+}
+
+// Первый рендер
+renderProducts();
+updateCartCount();
+</script>
+
+</body>
+</html>
