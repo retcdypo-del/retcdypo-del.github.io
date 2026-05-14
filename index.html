@@ -7,117 +7,412 @@
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: Arial, sans-serif; background: #f5f5f5; color: #333; }
-        header { background: #4a6741; color: white; padding: 20px; text-align: center; }
-        header h1 { font-size: 28px; }
+        header { background: #4a6741; color: white; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; }
+        header h1 { font-size: 24px; }
+        header .cart-btn { background: white; color: #4a6741; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; font-size: 16px; position: relative; }
+        header .cart-count { background: red; color: white; border-radius: 50%; padding: 2px 7px; font-size: 12px; position: absolute; top: -8px; right: -8px; }
         nav { background: #3d5636; padding: 10px; text-align: center; }
-        nav a { color: white; text-decoration: none; margin: 0 15px; font-size: 16px; }
+        nav a { color: white; text-decoration: none; margin: 0 12px; font-size: 14px; }
         nav a:hover { text-decoration: underline; }
-        .hero { background: #e8f0e4; padding: 50px 20px; text-align: center; }
-        .hero h2 { font-size: 32px; margin-bottom: 10px; }
-        .hero p { font-size: 18px; margin-bottom: 20px; }
-        .btn { display: inline-block; background: #4a6741; color: white; padding: 12px 30px; text-decoration: none; border-radius: 5px; font-size: 16px; }
-        .container { max-width: 1100px; margin: 0 auto; padding: 20px; }
-        .categories { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-top: 30px; }
-        .category-card { background: white; padding: 30px; border-radius: 8px; text-align: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-        .category-card h3 { font-size: 20px; margin-bottom: 10px; }
-        .category-card p { color: #777; font-size: 14px; }
-        .products { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-top: 30px; }
-        .product-card { background: white; border-radius: 8px; padding: 20px; text-align: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-        .product-card img { width: 100%; height: 200px; object-fit: cover; border-radius: 5px; margin-bottom: 15px; background: #eee; }
-        .product-card h3 { font-size: 18px; margin-bottom: 5px; }
-        .product-card .price { font-size: 22px; font-weight: bold; color: #4a6741; margin: 10px 0; }
-        .order-form { background: white; padding: 30px; border-radius: 8px; margin-top: 40px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-        .order-form h2 { margin-bottom: 20px; }
-        .order-form input, .order-form select { width: 100%; padding: 12px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 5px; font-size: 16px; }
-        .order-form button { background: #4a6741; color: white; border: none; padding: 15px 40px; border-radius: 5px; font-size: 18px; cursor: pointer; width: 100%; }
-        .order-form button:hover { background: #3d5636; }
-        footer { background: #333; color: #aaa; text-align: center; padding: 20px; margin-top: 40px; }
-        footer a { color: #4a6741; }
-        @media (max-width: 600px) { .hero h2 { font-size: 24px; } }
+        .hero { background: linear-gradient(135deg, #e8f0e4, #d0e0cc); padding: 40px 20px; text-align: center; }
+        .hero h2 { font-size: 28px; margin-bottom: 10px; }
+        .btn { display: inline-block; background: #4a6741; color: white; padding: 10px 25px; text-decoration: none; border-radius: 5px; font-size: 14px; border: none; cursor: pointer; }
+        .btn:hover { background: #3d5636; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 15px; }
+        .filters { background: white; padding: 20px; border-radius: 8px; margin-bottom: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .filters h3 { margin-bottom: 15px; }
+        .filter-row { display: flex; flex-wrap: wrap; gap: 15px; align-items: end; }
+        .filter-group { flex: 1; min-width: 150px; }
+        .filter-group label { display: block; font-size: 13px; margin-bottom: 5px; font-weight: bold; }
+        .filter-group select, .filter-group input { width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 5px; font-size: 14px; }
+        .price-slider { display: flex; gap: 10px; align-items: center; }
+        .price-slider input { width: 80px; }
+        .news-block { background: white; padding: 20px; border-radius: 8px; margin-bottom: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .news-block h3 { color: #4a6741; margin-bottom: 10px; }
+        .news-block .news-item { padding: 8px 0; border-bottom: 1px solid #eee; font-size: 14px; }
+        .news-block .news-date { color: #999; font-size: 12px; }
+        .products { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 20px; }
+        .product-card { background: white; border-radius: 8px; padding: 15px; text-align: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1); position: relative; transition: transform 0.2s; }
+        .product-card:hover { transform: translateY(-3px); }
+        .product-card .discount-badge { position: absolute; top: 10px; left: 10px; background: red; color: white; padding: 5px 10px; border-radius: 5px; font-size: 12px; font-weight: bold; }
+        .product-card .popular-badge { position: absolute; top: 10px; right: 10px; background: #ff9800; color: white; padding: 5px 10px; border-radius: 5px; font-size: 12px; }
+        .product-card img { width: 100%; height: 200px; object-fit: cover; border-radius: 5px; margin-bottom: 10px; background: #e0e0e0; }
+        .product-card h3 { font-size: 16px; margin-bottom: 5px; }
+        .product-card .props { font-size: 12px; color: #777; margin-bottom: 5px; }
+        .product-card .price { font-size: 20px; font-weight: bold; color: #4a6741; }
+        .product-card .old-price { text-decoration: line-through; color: #999; font-size: 14px; }
+        .product-card .btn { margin-top: 10px; width: 100%; }
+        .product-card .views { font-size: 11px; color: #aaa; margin-top: 5px; }
+        footer { background: #333; color: #aaa; padding: 30px 20px; margin-top: 40px; }
+        footer .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; max-width: 1200px; margin: 0 auto; }
+        footer h4 { color: white; margin-bottom: 10px; }
+        footer p, footer a { font-size: 13px; color: #aaa; text-decoration: none; }
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000; }
+        .modal-content { background: white; margin: 10% auto; padding: 30px; border-radius: 10px; max-width: 600px; max-height: 80vh; overflow-y: auto; position: relative; }
+        .modal .close { position: absolute; top: 15px; right: 20px; font-size: 24px; cursor: pointer; }
+        .cart-item { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #eee; }
+        .cart-item button { background: red; color: white; border: none; padding: 5px 10px; border-radius: 3px; cursor: pointer; }
+        .order-form input, .order-form textarea, .order-form select { width: 100%; padding: 10px; margin-bottom: 12px; border: 1px solid #ddd; border-radius: 5px; font-size: 14px; }
+        .order-form button { width: 100%; padding: 12px; font-size: 16px; }
+        .admin-form input { width: 100%; padding: 10px; margin-bottom: 10px; border: 1px solid #ddd; border-radius: 5px; }
+        .order-card { background: #f9f9f9; padding: 15px; border-radius: 5px; margin-bottom: 10px; border-left: 4px solid #4a6741; }
+        .order-card .status { font-weight: bold; }
+        @media (max-width: 600px) { .products { grid-template-columns: 1fr 1fr; } header h1 { font-size: 18px; } }
     </style>
 </head>
 <body>
 
 <header>
     <h1>🧹 ЧистоДом</h1>
-    <p>Товары для уюта и порядка в доме</p>
+    <button class="cart-btn" onclick="openCart()">🛒 Корзина <span class="cart-count" id="cartCount">0</span></button>
 </header>
 
 <nav>
-    <a href="#catalog">Каталог</a>
-    <a href="#order">Заказать</a>
-    <a href="#contacts">Контакты</a>
+    <a href="#" onclick="scrollToSection('catalog')">Каталог</a>
+    <a href="#" onclick="scrollToSection('filters')">Фильтры</a>
+    <a href="#" onclick="scrollToSection('news')">Новости</a>
+    <a href="#" onclick="scrollToSection('order-form-section')">Заказать услугу</a>
+    <a href="#" onclick="scrollToSection('feedback')">Обратная связь</a>
+    <a href="#" onclick="scrollToSection('contacts')">Контакты</a>
+    <a href="#" onclick="openAdminLogin()">🔒 Админ</a>
 </nav>
 
 <section class="hero">
     <h2>Всё для чистоты и уюта</h2>
-    <p>Контейнеры, органайзеры, средства для уборки — с доставкой по России</p>
-    <a href="#catalog" class="btn">Смотреть товары</a>
+    <p>30 товаров для дома: контейнеры, органайзеры, средства для уборки</p>
 </section>
 
-<div class="container" id="catalog">
-    <h2>Категории</h2>
-    <div class="categories">
-        <div class="category-card"><h3>🍳 Кухня</h3><p>Контейнеры, банки, органайзеры</p></div>
-        <div class="category-card"><h3>🛁 Ванная</h3><p>Дозаторы, полки, коврики</p></div>
-        <div class="category-card"><h3>🧽 Уборка</h3><p>Швабры, средства, салфетки</p></div>
-        <div class="category-card"><h3>📦 Хранение</h3><p>Боксы, корзины, вакуумные пакеты</p></div>
+<div class="container">
+
+    <!-- Новости -->
+    <div class="news-block" id="news">
+        <h3>📢 Новости и акции</h3>
+        <div class="news-item"><span class="news-date">15.05.2026</span> — Скидка 20% на все контейнеры до конца месяца!</div>
+        <div class="news-item"><span class="news-date">10.05.2026</span> — Новое поступление: органайзеры для ванной.</div>
+        <div class="news-item"><span class="news-date">01.05.2026</span> — Бесплатная доставка при заказе от 3000 ₽.</div>
     </div>
 
-    <h2 style="margin-top: 40px;">Популярные товары</h2>
-    <div class="products">
-        <div class="product-card">
-            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='200'%3E%3Crect fill='%23e0e0e0' width='300' height='200'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.3em' fill='%23999' font-size='18'%3EКонтейнер 1л%3C/text%3E%3C/svg%3E" alt="Контейнер">
-            <h3>Контейнер для хранения 1 л</h3>
-            <p>Пластиковый, с герметичной крышкой</p>
-            <p class="price">350 ₽</p>
-            <a href="#order" class="btn" onclick="document.getElementById('product').value='Контейнер для хранения 1 л — 350 ₽'">Заказать</a>
-        </div>
-
-        <div class="product-card">
-            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='200'%3E%3Crect fill='%23e0e0e0' width='300' height='200'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.3em' fill='%23999' font-size='18'%3EОрганайзер%3C/text%3E%3C/svg%3E" alt="Органайзер">
-            <h3>Органайзер для ящика</h3>
-            <p>Регулируемый разделитель</p>
-            <p class="price">420 ₽</p>
-            <a href="#order" class="btn" onclick="document.getElementById('product').value='Органайзер для ящика — 420 ₽'">Заказать</a>
-        </div>
-
-        <div class="product-card">
-            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='200'%3E%3Crect fill='%23e0e0e0' width='300' height='200'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.3em' fill='%23999' font-size='18'%3EДозатор%3C/text%3E%3C/svg%3E" alt="Дозатор">
-            <h3>Дозатор для жидкого мыла</h3>
-            <p>Керамический, 350 мл</p>
-            <p class="price">890 ₽</p>
-            <a href="#order" class="btn" onclick="document.getElementById('product').value='Дозатор для жидкого мыла — 890 ₽'">Заказать</a>
-        </div>
-
-        <div class="product-card">
-            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='200'%3E%3Crect fill='%23e0e0e0' width='300' height='200'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.3em' fill='%23999' font-size='18'%3EШвабра%3C/text%3E%3C/svg%3E" alt="Швабра">
-            <h3>Швабра отжимная</h3>
-            <p>С ведром в комплекте</p>
-            <p class="price">1490 ₽</p>
-            <a href="#order" class="btn" onclick="document.getElementById('product').value='Швабра отжимная — 1490 ₽'">Заказать</a>
+    <!-- Фильтры -->
+    <div class="filters" id="filters">
+        <h3>🔍 Фильтры и поиск</h3>
+        <div class="filter-row">
+            <div class="filter-group">
+                <label>Поиск</label>
+                <input type="text" id="searchInput" placeholder="Название или производитель..." oninput="renderProducts()">
+            </div>
+            <div class="filter-group">
+                <label>Категория</label>
+                <select id="filterCategory" onchange="renderProducts()">
+                    <option value="all">Все</option>
+                    <option value="Кухня">Кухня</option>
+                    <option value="Ванная">Ванная</option>
+                    <option value="Уборка">Уборка</option>
+                    <option value="Хранение">Хранение</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label>Объём</label>
+                <select id="filterVolume" onchange="renderProducts()">
+                    <option value="all">Все</option>
+                    <option value="0.5">0.5 л</option>
+                    <option value="1">1 л</option>
+                    <option value="2">2 л</option>
+                    <option value="3">3 л</option>
+                    <option value="5">5 л</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label>Производитель</label>
+                <select id="filterBrand" onchange="renderProducts()">
+                    <option value="all">Все</option>
+                    <option value="ХозПром">ХозПром</option>
+                    <option value="ЧистоПласт">ЧистоПласт</option>
+                    <option value="ДомСтандарт">ДомСтандарт</option>
+                    <option value="ЭкоБыт">ЭкоБыт</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label>Цена от</label>
+                <input type="number" id="priceMin" placeholder="0" oninput="renderProducts()">
+            </div>
+            <div class="filter-group">
+                <label>Цена до</label>
+                <input type="number" id="priceMax" placeholder="5000" oninput="renderProducts()">
+            </div>
         </div>
     </div>
 
-    <div class="order-form" id="order">
-        <h2>Оформление заказа</h2>
-        <form action="https://formspree.io/f/ТВОЙ_КОД" method="POST">
-            <input type="hidden" name="product" id="product" value="Товар не выбран">
-            <label>Ваше имя:</label>
-            <input type="text" name="name" placeholder="Иван Петров" required>
-            <label>Телефон:</label>
-            <input type="tel" name="phone" placeholder="+7 (999) 123-45-67" required>
-            <label>Email:</label>
-            <input type="email" name="email" placeholder="ivan@mail.ru" required>
-            <button type="submit">Отправить заказ</button>
+    <!-- Каталог -->
+    <h2 id="catalog">Товары (<span id="productCount">30</span>)</h2>
+    <div class="products" id="productsContainer"></div>
+
+    <!-- Форма заказа услуги -->
+    <div class="filters" id="order-form-section" style="margin-top:30px">
+        <h3>📋 Заказать услугу / Запись на приём</h3>
+        <form class="order-form" onsubmit="submitService(event)">
+            <input type="text" id="serviceName" placeholder="Ваше имя" required>
+            <input type="tel" id="servicePhone" placeholder="Телефон" required>
+            <select id="serviceType">
+                <option>Консультация по подбору товаров</option>
+                <option>Уборка дома</option>
+                <option>Организация хранения</option>
+            </select>
+            <input type="date" id="serviceDate">
+            <textarea id="serviceMessage" placeholder="Комментарий" rows="3"></textarea>
+            <button type="submit" class="btn">Отправить заявку</button>
+        </form>
+    </div>
+
+    <!-- Обратная связь -->
+    <div class="filters" id="feedback" style="margin-top:30px">
+        <h3>💬 Обратная связь</h3>
+        <form class="order-form" onsubmit="submitFeedback(event)">
+            <input type="text" id="fbName" placeholder="Ваше имя" required>
+            <input type="email" id="fbEmail" placeholder="Email" required>
+            <textarea id="fbMessage" placeholder="Ваше сообщение" rows="3" required></textarea>
+            <button type="submit" class="btn">Отправить</button>
+        </form>
+    </div>
+
+</div>
+
+<footer id="contacts">
+    <div class="footer-grid">
+        <div>
+            <h4>ЧистоДом</h4>
+            <p>Товары для уюта и порядка с 2026 года.</p>
+        </div>
+        <div>
+            <h4>Контакты</h4>
+            <p>📞 +7 (999) 123-45-67</p>
+            <p>✉️ info@chistodom.ru</p>
+            <p>📍 г. Москва, ул. Примерная, д.1</p>
+        </div>
+        <div>
+            <h4>Реквизиты</h4>
+            <p>ИП Иванов И.И.</p>
+            <p>ИНН 1234567890</p>
+            <p>ОГРНИП 123456789012345</p>
+        </div>
+        <div>
+            <h4>Информация</h4>
+            <p><a href="#">Политика конфиденциальности</a></p>
+            <p><a href="#">Доставка и оплата</a></p>
+            <p><a href="#">Возврат товара</a></p>
+        </div>
+    </div>
+    <p style="margin-top:20px">© 2026 ЧистоДом. Все права защищены.</p>
+</footer>
+
+<!-- Модальное окно корзины -->
+<div class="modal" id="cartModal">
+    <div class="modal-content">
+        <span class="close" onclick="closeCart()">×</span>
+        <h2>🛒 Корзина</h2>
+        <div id="cartItems"><p>Корзина пуста</p></div>
+        <h3 id="cartTotal" style="margin-top:15px">Итого: 0 ₽</h3>
+        <button class="btn" onclick="openCheckout()" style="margin-top:15px; width:100%">Оформить заказ</button>
+    </div>
+</div>
+
+<!-- Модальное окно оформления заказа -->
+<div class="modal" id="checkoutModal">
+    <div class="modal-content">
+        <span class="close" onclick="closeCheckout()">×</span>
+        <h2>📝 Оформление заказа</h2>
+        <form class="order-form" onsubmit="submitOrder(event)">
+            <input type="text" id="orderName" placeholder="Ваше имя" required>
+            <input type="tel" id="orderPhone" placeholder="Телефон" required>
+            <input type="email" id="orderEmail" placeholder="Email" required>
+            <textarea id="orderAddress" placeholder="Адрес доставки" rows="2" required></textarea>
+            <p><strong>Товары:</strong> <span id="orderSummary"></span></p>
+            <p><strong>Сумма:</strong> <span id="orderTotal"></span></p>
+            <button type="submit" class="btn">Подтвердить заказ</button>
         </form>
     </div>
 </div>
 
-<footer id="contacts">
-    <p>📞 Телефон: +7 (999) 123-45-67 | ✉️ Email: info@chistodom.ru</p>
-    <p>© 2026 ЧистоДом. Все права защищены.</p>
-</footer>
+<!-- Модальное окно админа -->
+<div class="modal" id="adminLoginModal">
+    <div class="modal-content">
+        <span class="close" onclick="closeAdminLogin()">×</span>
+        <h2>🔒 Вход для администратора</h2>
+        <div class="admin-form">
+            <input type="password" id="adminPassword" placeholder="Пароль">
+            <button class="btn" onclick="loginAdmin()" style="width:100%">Войти</button>
+        </div>
+    </div>
+</div>
 
-</body>
-</html>
+<!-- Модальное окно панели админа -->
+<div class="modal" id="adminPanelModal">
+    <div class="modal-content" style="max-width:800px">
+        <span class="close" onclick="closeAdminPanel()">×</span>
+        <h2>📊 Панель администратора</h2>
+        <h3 style="margin-top:15px">Заказы</h3>
+        <div id="adminOrders"><p>Заказов пока нет</p></div>
+        <h3 style="margin-top:15px">Заявки на услуги</h3>
+        <div id="adminServices"><p>Заявок пока нет</p></div>
+        <h3 style="margin-top:15px">Сообщения обратной связи</h3>
+        <div id="adminFeedback"><p>Сообщений пока нет</p></div>
+    </div>
+</div>
+
+<script>
+// ===== ДАННЫЕ ТОВАРОВ =====
+const products = [
+    { id:1, name:"Контейнер 0.5 л", category:"Кухня", price:200, oldPrice:250, volume:"0.5", brand:"ХозПром", img:"https://placehold.co/300x200/e8e8e8/666?text=Контейнер+0.5л", popular:0 },
+    { id:2, name:"Контейнер 1 л", category:"Кухня", price:350, oldPrice:400, volume:"1", brand:"ХозПром", img:"https://placehold.co/300x200/e8e8e8/666?text=Контейнер+1л", popular:0 },
+    { id:3, name:"Контейнер 2 л", category:"Кухня", price:450, oldPrice:null, volume:"2", brand:"ЧистоПласт", img:"https://placehold.co/300x200/e8e8e8/666?text=Контейнер+2л", popular:0 },
+    { id:4, name:"Контейнер 3 л", category:"Кухня", price:550, oldPrice:600, volume:"3", brand:"ЧистоПласт", img:"https://placehold.co/300x200/e8e8e8/666?text=Контейнер+3л", popular:0 },
+    { id:5, name:"Контейнер 5 л", category:"Хранение", price:750, oldPrice:null, volume:"5", brand:"ДомСтандарт", img:"https://placehold.co/300x200/e8e8e8/666?text=Контейнер+5л", popular:0 },
+    { id:6, name:"Банка стеклянная 0.5 л", category:"Кухня", price:180, oldPrice:220, volume:"0.5", brand:"ЭкоБыт", img:"https://placehold.co/300x200/e8e8e8/666?text=Банка+0.5л", popular:0 },
+    { id:7, name:"Банка стеклянная 1 л", category:"Кухня", price:250, oldPrice:null, volume:"1", brand:"ЭкоБыт", img:"https://placehold.co/300x200/e8e8e8/666?text=Банка+1л", popular:0 },
+    { id:8, name:"Банка стеклянная 2 л", category:"Хранение", price:350, oldPrice:400, volume:"2", brand:"ЭкоБыт", img:"https://placehold.co/300x200/e8e8e8/666?text=Банка+2л", popular:0 },
+    { id:9, name:"Органайзер для ящика", category:"Кухня", price:420, oldPrice:null, volume:"all", brand:"ХозПром", img:"https://placehold.co/300x200/e8e8e8/666?text=Органайзер", popular:0 },
+    { id:10, name:"Органайзер для столовых приборов", category:"Кухня", price:380, oldPrice:450, volume:"all", brand:"ДомСтандарт", img:"https://placehold.co/300x200/e8e8e8/666?text=Органайзер+приборы", popular:0 },
+    { id:11, name:"Разделитель для полки", category:"Хранение", price:290, oldPrice:null, volume:"all", brand:"ХозПром", img:"https://placehold.co/300x200/e8e8e8/666?text=Разделитель", popular:0 },
+    { id:12, name:"Полка навесная", category:"Ванная", price:650, oldPrice:750, volume:"all", brand:"ДомСтандарт", img:"https://placehold.co/300x200/e8e8e8/666?text=Полка", popular:0 },
+    { id:13, name:"Дозатор для мыла", category:"Ванная", price:890, oldPrice:null, volume:"0.5", brand:"ЭкоБыт", img:"https://placehold.co/300x200/e8e8e8/666?text=Дозатор", popular:0 },
+    { id:14, name:"Дозатор для шампуня", category:"Ванная", price:750, oldPrice:850, volume:"0.5", brand:"ЧистоПласт", img:"https://placehold.co/300x200/e8e8e8/666?text=Дозатор+шампунь", popular:0 },
+    { id:15, name:"Коврик для ванной", category:"Ванная", price:1200, oldPrice:null, volume:"all", brand:"ДомСтандарт", img:"https://placehold.co/300x200/e8e8e8/666?text=Коврик", popular:0 },
+    { id:16, name:"Шторка для ванной", category:"Ванная", price:950, oldPrice:1100, volume:"all", brand:"ДомСтандарт", img:"https://placehold.co/300x200/e8e8e8/666?text=Шторка", popular:0 },
+    { id:17, name:"Корзина для белья", category:"Ванная", price:1500, oldPrice:null, volume:"all", brand:"ЧистоПласт", img:"https://placehold.co/300x200/e8e8e8/666?text=Корзина", popular:0 },
+    { id:18, name:"Швабра отжимная", category:"Уборка", price:1490, oldPrice:1700, volume:"all", brand:"ХозПром", img:"https://placehold.co/300x200/e8e8e8/666?text=Швабра", popular:0 },
+    { id:19, name:"Швабра плоская", category:"Уборка", price:890, oldPrice:null, volume:"all", brand:"ЧистоПласт", img:"https://placehold.co/300x200/e8e8e8/666?text=Швабра+плоская", popular:0 },
+    { id:20, name:"Ведро 5 л", category:"Уборка", price:450, oldPrice:500, volume:"5", brand:"ХозПром", img:"https://placehold.co/300x200/e8e8e8/666?text=Ведро+5л", popular:0 },
+    { id:21, name:"Ведро 10 л", category:"Уборка", price:650, oldPrice:null, volume:"5", brand:"ДомСтандарт", img:"https://placehold.co/300x200/e8e8e8/666?text=Ведро+10л", popular:0 },
+    { id:22, name:"Средство для пола", category:"Уборка", price:320, oldPrice:380, volume:"1", brand:"ЭкоБыт", img:"https://placehold.co/300x200/e8e8e8/666?text=Средство+пол", popular:0 },
+    { id:23, name:"Средство для окон", category:"Уборка", price:280, oldPrice:null, volume:"0.5", brand:"ЭкоБыт", img:"https://placehold.co/300x200/e8e8e8/666?text=Средство+окна", popular:0 },
+    { id:24, name:"Салфетки универсальные", category:"Уборка", price:150, oldPrice:200, volume:"all", brand:"ЧистоПласт", img:"https://placehold.co/300x200/e8e8e8/666?text=Салфетки", popular:0 },
+    { id:25, name:"Губки для посуды (набор 5 шт)", category:"Кухня", price:120, oldPrice:null, volume:"all", brand:"ХозПром", img:"https://placehold.co/300x200/e8e8e8/666?text=Губки", popular:0 },
+    { id:26, name:"Вакуумные пакеты 3 шт", category:"Хранение", price:550, oldPrice:650, volume:"all", brand:"ДомСтандарт", img:"https://placehold.co/300x200/e8e8e8/666?text=Вакуум+пакеты", popular:0 },
+    { id:27, name:"Бокс для хранения 30 л", category:"Хранение", price:950, oldPrice:null, volume:"5", brand:"ЧистоПласт", img:"https://placehold.co/300x200/e8e8e8/666?text=Бокс+30л", popular:0 },
+    { id:28, name:"Корзина плетёная", category:"Хранение", price:780, oldPrice:900, volume:"all", brand:"ЭкоБыт", img:"https://placehold.co/300x200/e8e8e8/666?text=Корзина+плетеная", popular:0 },
+    { id:29, name:"Полотенце кухонное", category:"Кухня", price:350, oldPrice:null, volume:"all", brand:"ДомСтандарт", img:"https://placehold.co/300x200/e8e8e8/666?text=Полотенце", popular:0 },
+    { id:30, name:"Прихватка силиконовая", category:"Кухня", price:220, oldPrice:280, volume:"all", brand:"ХозПром", img:"https://placehold.co/300x200/e8e8e8/666?text=Прихватка", popular:0 }
+];
+
+// ===== ХРАНИЛИЩЕ =====
+let cart = JSON.parse(localStorage.getItem('cart') || '[]');
+let orders = JSON.parse(localStorage.getItem('orders') || '[]');
+let services = JSON.parse(localStorage.getItem('services') || '[]');
+let feedbacks = JSON.parse(localStorage.getItem('feedbacks') || '[]');
+let populars = JSON.parse(localStorage.getItem('populars') || '{}');
+const ADMIN_PASSWORD = "admin123"; // ПОМЕНЯЙ ПАРОЛЬ ЗДЕСЬ
+
+// ===== РЕНДЕР ТОВАРОВ =====
+function renderProducts() {
+    const search = (document.getElementById('searchInput').value || '').toLowerCase();
+    const category = document.getElementById('filterCategory').value;
+    const volume = document.getElementById('filterVolume').value;
+    const brand = document.getElementById('filterBrand').value;
+    const priceMin = parseInt(document.getElementById('priceMin').value) || 0;
+    const priceMax = parseInt(document.getElementById('priceMax').value) || 999999;
+
+    const filtered = products.filter(p => {
+        if (search && !p.name.toLowerCase().includes(search) && !p.brand.toLowerCase().includes(search)) return false;
+        if (category !== 'all' && p.category !== category) return false;
+        if (volume !== 'all' && p.volume !== volume) return false;
+        if (brand !== 'all' && p.brand !== brand) return false;
+        if (p.price < priceMin || p.price > priceMax) return false;
+        return true;
+    });
+
+    document.getElementById('productCount').textContent = filtered.length;
+
+    const container = document.getElementById('productsContainer');
+    container.innerHTML = filtered.map(p => {
+        const discount = p.oldPrice ? Math.round((1 - p.price/p.oldPrice)*100) : 0;
+        const pop = populars[p.id] || 0;
+        return `
+        <div class="product-card">
+            ${discount > 0 ? `<span class="discount-badge">-${discount}%</span>` : ''}
+            ${pop >= 5 ? `<span class="popular-badge">🔥 Популярный</span>` : ''}
+            <img src="${p.img}" alt="${p.name}" onerror="this.src='https://placehold.co/300x200/e0e0e0/999?text=Нет+фото'">
+            <h3>${p.name}</h3>
+            <p class="props">Объём: ${p.volume === 'all' ? 'не применимо' : p.volume + ' л'} | Производитель: ${p.brand}</p>
+            ${discount > 0 ? `<p class="old-price">${p.oldPrice} ₽</p>` : ''}
+            <p class="price">${p.price} ₽</p>
+            <p class="views">👁 ${pop} просмотров</p>
+            <button class="btn" onclick="addToCart(${p.id}); trackView(${p.id})">В корзину</button>
+        </div>`;
+    }).join('');
+}
+
+function trackView(id) {
+    populars[id] = (populars[id] || 0) + 1;
+    localStorage.setItem('populars', JSON.stringify(populars));
+    renderProducts();
+}
+
+// ===== КОРЗИНА =====
+function addToCart(id) {
+    const product = products.find(p => p.id === id);
+    const existing = cart.find(i => i.id === id);
+    if (existing) { existing.qty++; }
+    else { cart.push({...product, qty:1}); }
+    saveCart();
+    updateCartCount();
+    alert(product.name + ' добавлен в корзину!');
+}
+
+function removeFromCart(id) {
+    cart = cart.filter(i => i.id !== id);
+    saveCart();
+    updateCartCount();
+    openCart();
+}
+
+function saveCart() { localStorage.setItem('cart', JSON.stringify(cart)); }
+function updateCartCount() { document.getElementById('cartCount').textContent = cart.reduce((s,i) => s + i.qty, 0); }
+
+function openCart() {
+    const modal = document.getElementById('cartModal');
+    const itemsDiv = document.getElementById('cartItems');
+    if (cart.length === 0) { itemsDiv.innerHTML = '<p>Корзина пуста</p>'; }
+    else {
+        itemsDiv.innerHTML = cart.map(i => `
+            <div class="cart-item">
+                <span>${i.name} x${i.qty}</span>
+                <span>${i.price * i.qty} ₽</span>
+                <button onclick="removeFromCart(${i.id})">Удалить</button>
+            </div>`).join('');
+    }
+    document.getElementById('cartTotal').textContent = 'Итого: ' + cart.reduce((s,i) => s + i.price*i.qty, 0) + ' ₽';
+    modal.style.display = 'block';
+}
+
+function closeCart() { document.getElementById('cartModal').style.display = 'none'; }
+
+function openCheckout() {
+    if (cart.length === 0) { alert('Корзина пуста!'); return; }
+    document.getElementById('cartModal').style.display = 'none';
+    document.getElementById('checkoutModal').style.display = 'block';
+    document.getElementById('orderSummary').textContent = cart.map(i => i.name + ' x' + i.qty).join(', ');
+    document.getElementById('orderTotal').textContent = cart.reduce((s,i) => s + i.price*i.qty, 0) + ' ₽';
+}
+
+function closeCheckout() { document.getElementById('checkoutModal').style.display = 'none'; }
+
+function submitOrder(e) {
+    e.preventDefault();
+    const order = {
+        id: Date.now(),
+        date: new Date().toLocaleString(),
+        name: document.getElementById('orderName').value,
+        phone: document.getElementById('orderPhone').value,
+        email: document.getElementById('orderEmail').value,
+        address: document.getElementById('orderAddress').value,
+        items: [...cart],
+        total: cart.reduce((s,i) => s + i.price*i.qty, 0),
+        status: 'Новый'
+    };
+    orders.push(order);
+    localStorage.setItem('orders', JSON.stringify(orders));
+    cart = [];
+    saveCart();
+    updateCartCount();
+    closeCheckout();
+    alert('Заказ оформлен! Мы свяжемся с вами.');
+    document.getElementById('
