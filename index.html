@@ -87,7 +87,7 @@
 
 <section class="hero">
     <h2>Всё для чистоты и уюта</h2>
-    <p>Товары для дома: контейнеры, органайзеры, средства для уборки</p>
+    <p>30 товаров для дома: контейнеры, органайзеры, средства для уборки</p>
 </section>
 
 <div class="container">
@@ -182,7 +182,7 @@
         </div>
         <div>
             <h4>Реквизиты</h4>
-            <p>ИП Савченко Д.С.</p>
+            <p>ИП Иванов И.И.</p>
             <p>ИНН 1234567890</p>
             <p>ОГРНИП 123456789012345</p>
         </div>
@@ -270,42 +270,38 @@
 </div>
 
 <script>
-// ===== ТОВАРЫ (30 шт) с цветными заглушками =====
-function makeImg(cat, text, emoji, bg) {
-    return `data:image/svg+xml,${encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" width="300" height="200"><rect fill="${bg}" width="300" height="200"/><text x="150" y="75" text-anchor="middle" font-size="55">${emoji}</text><text x="150" y="130" text-anchor="middle" fill="#555" font-size="13" font-weight="bold">${text}</text><text x="150" y="155" text-anchor="middle" fill="#888" font-size="11">${cat}</text></svg>`)}`;
-}
-
+// ===== ТОВАРЫ (30 шт) — фото: images/1.jpg ... images/30.jpg =====
 const products = [
-    { id:1, name:"Контейнер 0.5 л", category:"Кухня", price:200, oldPrice:250, brand:"ХозПром", volume:"0.5 л", material:"Пищевой пластик", color:"Прозрачный", country:"Россия", img:makeImg("Кухня","Контейнер 0.5 л","📦","#FFE0B2") },
-    { id:2, name:"Контейнер 1 л", category:"Кухня", price:350, oldPrice:400, brand:"ХозПром", volume:"1 л", material:"Пищевой пластик", color:"Прозрачный", country:"Россия", img:makeImg("Кухня","Контейнер 1 л","📦","#FFE0B2") },
-    { id:3, name:"Контейнер 2 л", category:"Кухня", price:450, oldPrice:null, brand:"ЧистоПласт", volume:"2 л", material:"Пищевой пластик", color:"Белый", country:"Россия", img:makeImg("Кухня","Контейнер 2 л","📦","#E8F5E9") },
-    { id:4, name:"Контейнер 3 л", category:"Кухня", price:550, oldPrice:600, brand:"ЧистоПласт", volume:"3 л", material:"Пищевой пластик", color:"Белый", country:"Россия", img:makeImg("Кухня","Контейнер 3 л","📦","#E8F5E9") },
-    { id:5, name:"Контейнер 5 л", category:"Хранение", price:750, oldPrice:null, brand:"ДомСтандарт", volume:"5 л", material:"Пластик", color:"Серый", country:"Китай", img:makeImg("Хранение","Контейнер 5 л","🗃️","#E3F2FD") },
-    { id:6, name:"Банка стеклянная 0.5 л", category:"Кухня", price:180, oldPrice:220, brand:"ЭкоБыт", volume:"0.5 л", material:"Стекло", color:"Прозрачный", country:"Россия", img:makeImg("Кухня","Банка 0.5 л","🫙","#FFF9C4") },
-    { id:7, name:"Банка стеклянная 1 л", category:"Кухня", price:250, oldPrice:null, brand:"ЭкоБыт", volume:"1 л", material:"Стекло", color:"Прозрачный", country:"Россия", img:makeImg("Кухня","Банка 1 л","🫙","#FFF9C4") },
-    { id:8, name:"Банка стеклянная 2 л", category:"Хранение", price:350, oldPrice:400, brand:"ЭкоБыт", volume:"2 л", material:"Стекло", color:"Прозрачный", country:"Россия", img:makeImg("Хранение","Банка 2 л","🫙","#FFF9C4") },
-    { id:9, name:"Органайзер для ящика", category:"Кухня", price:420, oldPrice:null, brand:"ХозПром", volume:"—", material:"Металл", color:"Серебристый", country:"Россия", img:makeImg("Кухня","Органайзер","🗂️","#FFCCBC") },
-    { id:10, name:"Органайзер для приборов", category:"Кухня", price:380, oldPrice:450, brand:"ДомСтандарт", volume:"—", material:"Пластик", color:"Чёрный", country:"Китай", img:makeImg("Кухня","Органайзер","🍴","#FFCCBC") },
-    { id:11, name:"Разделитель для полки", category:"Хранение", price:290, oldPrice:null, brand:"ХозПром", volume:"—", material:"Металл", color:"Белый", country:"Россия", img:makeImg("Хранение","Разделитель","📏","#E3F2FD") },
-    { id:12, name:"Полка навесная", category:"Ванная", price:650, oldPrice:750, brand:"ДомСтандарт", volume:"—", material:"Металл", color:"Хром", country:"Китай", img:makeImg("Ванная","Полка навесная","🪥","#F3E5F5") },
-    { id:13, name:"Дозатор для мыла", category:"Ванная", price:890, oldPrice:null, brand:"ЭкоБыт", volume:"350 мл", material:"Керамика", color:"Белый", country:"Россия", img:makeImg("Ванная","Дозатор","🧴","#F3E5F5") },
-    { id:14, name:"Дозатор для шампуня", category:"Ванная", price:750, oldPrice:850, brand:"ЧистоПласт", volume:"500 мл", material:"Пластик", color:"Прозрачный", country:"Россия", img:makeImg("Ванная","Дозатор","🧴","#E1BEE7") },
-    { id:15, name:"Коврик для ванной", category:"Ванная", price:1200, oldPrice:null, brand:"ДомСтандарт", volume:"—", material:"Резина", color:"Серый", country:"Китай", img:makeImg("Ванная","Коврик","🟫","#EFEBE9") },
-    { id:16, name:"Шторка для ванной", category:"Ванная", price:950, oldPrice:1100, brand:"ДомСтандарт", volume:"—", material:"Полиэстер", color:"Белый", country:"Китай", img:makeImg("Ванная","Шторка","🚿","#E0F7FA") },
-    { id:17, name:"Корзина для белья", category:"Ванная", price:1500, oldPrice:null, brand:"ЧистоПласт", volume:"60 л", material:"Пластик", color:"Бежевый", country:"Россия", img:makeImg("Ванная","Корзина","🧺","#FFF3E0") },
-    { id:18, name:"Швабра отжимная", category:"Уборка", price:1490, oldPrice:1700, brand:"ХозПром", volume:"—", material:"Металл/пластик", color:"Зелёный", country:"Россия", img:makeImg("Уборка","Швабра","🧹","#C8E6C9") },
-    { id:19, name:"Швабра плоская", category:"Уборка", price:890, oldPrice:null, brand:"ЧистоПласт", volume:"—", material:"Алюминий", color:"Синий", country:"Россия", img:makeImg("Уборка","Швабра","🧹","#BBDEFB") },
-    { id:20, name:"Ведро 5 л", category:"Уборка", price:450, oldPrice:500, brand:"ХозПром", volume:"5 л", material:"Пластик", color:"Зелёный", country:"Россия", img:makeImg("Уборка","Ведро 5 л","🪣","#C8E6C9") },
-    { id:21, name:"Ведро 10 л", category:"Уборка", price:650, oldPrice:null, brand:"ДомСтандарт", volume:"10 л", material:"Пластик", color:"Серый", country:"Китай", img:makeImg("Уборка","Ведро 10 л","🪣","#CFD8DC") },
-    { id:22, name:"Средство для пола", category:"Уборка", price:320, oldPrice:380, brand:"ЭкоБыт", volume:"1 л", material:"Жидкость", color:"—", country:"Россия", img:makeImg("Уборка","Средство","🧴","#DCEDC8") },
-    { id:23, name:"Средство для окон", category:"Уборка", price:280, oldPrice:null, brand:"ЭкоБыт", volume:"500 мл", material:"Жидкость", color:"—", country:"Россия", img:makeImg("Уборка","Средство","🪟","#E0F7FA") },
-    { id:24, name:"Салфетки универсальные", category:"Уборка", price:150, oldPrice:200, brand:"ЧистоПласт", volume:"—", material:"Микрофибра", color:"Жёлтый", country:"Китай", img:makeImg("Уборка","Салфетки","🧻","#FFF9C4") },
-    { id:25, name:"Губки для посуды (5 шт)", category:"Кухня", price:120, oldPrice:null, brand:"ХозПром", volume:"—", material:"Поролон", color:"Разноцветный", country:"Россия", img:makeImg("Кухня","Губки","🧽","#FFECB3") },
-    { id:26, name:"Вакуумные пакеты 3 шт", category:"Хранение", price:550, oldPrice:650, brand:"ДомСтандарт", volume:"—", material:"Пластик", color:"Прозрачный", country:"Китай", img:makeImg("Хранение","Вакуум пакеты","🛍️","#E3F2FD") },
-    { id:27, name:"Бокс для хранения 30 л", category:"Хранение", price:950, oldPrice:null, brand:"ЧистоПласт", volume:"30 л", material:"Пластик", color:"Прозрачный", country:"Россия", img:makeImg("Хранение","Бокс 30 л","📦","#BBDEFB") },
-    { id:28, name:"Корзина плетёная", category:"Хранение", price:780, oldPrice:900, brand:"ЭкоБыт", volume:"—", material:"Ротанг", color:"Коричневый", country:"Россия", img:makeImg("Хранение","Корзина","🧺","#D7CCC8") },
-    { id:29, name:"Полотенце кухонное", category:"Кухня", price:350, oldPrice:null, brand:"ДомСтандарт", volume:"—", material:"Хлопок", color:"Белый", country:"Китай", img:makeImg("Кухня","Полотенце","🧻","#FFCDD2") },
-    { id:30, name:"Прихватка силиконовая", category:"Кухня", price:220, oldPrice:280, brand:"ХозПром", volume:"—", material:"Силикон", color:"Красный", country:"Россия", img:makeImg("Кухня","Прихватка","🧤","#FFCDD2") }
+    { id:1, name:"Контейнер 0.5 л", category:"Кухня", price:200, oldPrice:250, brand:"ХозПром", volume:"0.5 л", material:"Пищевой пластик", color:"Прозрачный", country:"Россия", img:"images/1.jpg" },
+    { id:2, name:"Контейнер 1 л", category:"Кухня", price:350, oldPrice:400, brand:"ХозПром", volume:"1 л", material:"Пищевой пластик", color:"Прозрачный", country:"Россия", img:"images/2.jpg" },
+    { id:3, name:"Контейнер 2 л", category:"Кухня", price:450, oldPrice:null, brand:"ЧистоПласт", volume:"2 л", material:"Пищевой пластик", color:"Белый", country:"Россия", img:"images/3.jpg" },
+    { id:4, name:"Контейнер 3 л", category:"Кухня", price:550, oldPrice:600, brand:"ЧистоПласт", volume:"3 л", material:"Пищевой пластик", color:"Белый", country:"Россия", img:"images/4.jpg" },
+    { id:5, name:"Контейнер 5 л", category:"Хранение", price:750, oldPrice:null, brand:"ДомСтандарт", volume:"5 л", material:"Пластик", color:"Серый", country:"Китай", img:"images/5.jpg" },
+    { id:6, name:"Банка стеклянная 0.5 л", category:"Кухня", price:180, oldPrice:220, brand:"ЭкоБыт", volume:"0.5 л", material:"Стекло", color:"Прозрачный", country:"Россия", img:"images/6.jpg" },
+    { id:7, name:"Банка стеклянная 1 л", category:"Кухня", price:250, oldPrice:null, brand:"ЭкоБыт", volume:"1 л", material:"Стекло", color:"Прозрачный", country:"Россия", img:"images/7.jpg" },
+    { id:8, name:"Банка стеклянная 2 л", category:"Хранение", price:350, oldPrice:400, brand:"ЭкоБыт", volume:"2 л", material:"Стекло", color:"Прозрачный", country:"Россия", img:"images/8.jpg" },
+    { id:9, name:"Органайзер для ящика", category:"Кухня", price:420, oldPrice:null, brand:"ХозПром", volume:"—", material:"Металл", color:"Серебристый", country:"Россия", img:"images/9.jpg" },
+    { id:10, name:"Органайзер для приборов", category:"Кухня", price:380, oldPrice:450, brand:"ДомСтандарт", volume:"—", material:"Пластик", color:"Чёрный", country:"Китай", img:"images/10.jpg" },
+    { id:11, name:"Разделитель для полки", category:"Хранение", price:290, oldPrice:null, brand:"ХозПром", volume:"—", material:"Металл", color:"Белый", country:"Россия", img:"images/11.jpg" },
+    { id:12, name:"Полка навесная", category:"Ванная", price:650, oldPrice:750, brand:"ДомСтандарт", volume:"—", material:"Металл", color:"Хром", country:"Китай", img:"images/12.jpg" },
+    { id:13, name:"Дозатор для мыла", category:"Ванная", price:890, oldPrice:null, brand:"ЭкоБыт", volume:"350 мл", material:"Керамика", color:"Белый", country:"Россия", img:"images/13.jpg" },
+    { id:14, name:"Дозатор для шампуня", category:"Ванная", price:750, oldPrice:850, brand:"ЧистоПласт", volume:"500 мл", material:"Пластик", color:"Прозрачный", country:"Россия", img:"images/14.jpg" },
+    { id:15, name:"Коврик для ванной", category:"Ванная", price:1200, oldPrice:null, brand:"ДомСтандарт", volume:"—", material:"Резина", color:"Серый", country:"Китай", img:"images/15.jpg" },
+    { id:16, name:"Шторка для ванной", category:"Ванная", price:950, oldPrice:1100, brand:"ДомСтандарт", volume:"—", material:"Полиэстер", color:"Белый", country:"Китай", img:"images/16.jpg" },
+    { id:17, name:"Корзина для белья", category:"Ванная", price:1500, oldPrice:null, brand:"ЧистоПласт", volume:"60 л", material:"Пластик", color:"Бежевый", country:"Россия", img:"images/17.jpg" },
+    { id:18, name:"Швабра отжимная", category:"Уборка", price:1490, oldPrice:1700, brand:"ХозПром", volume:"—", material:"Металл/пластик", color:"Зелёный", country:"Россия", img:"images/18.jpg" },
+    { id:19, name:"Швабра плоская", category:"Уборка", price:890, oldPrice:null, brand:"ЧистоПласт", volume:"—", material:"Алюминий", color:"Синий", country:"Россия", img:"images/19.jpg" },
+    { id:20, name:"Ведро 5 л", category:"Уборка", price:450, oldPrice:500, brand:"ХозПром", volume:"5 л", material:"Пластик", color:"Зелёный", country:"Россия", img:"images/20.jpg" },
+    { id:21, name:"Ведро 10 л", category:"Уборка", price:650, oldPrice:null, brand:"ДомСтандарт", volume:"10 л", material:"Пластик", color:"Серый", country:"Китай", img:"images/21.jpg" },
+    { id:22, name:"Средство для пола", category:"Уборка", price:320, oldPrice:380, brand:"ЭкоБыт", volume:"1 л", material:"Жидкость", color:"—", country:"Россия", img:"images/22.jpg" },
+    { id:23, name:"Средство для окон", category:"Уборка", price:280, oldPrice:null, brand:"ЭкоБыт", volume:"500 мл", material:"Жидкость", color:"—", country:"Россия", img:"images/23.jpg" },
+    { id:24, name:"Салфетки универсальные", category:"Уборка", price:150, oldPrice:200, brand:"ЧистоПласт", volume:"—", material:"Микрофибра", color:"Жёлтый", country:"Китай", img:"images/24.jpg" },
+    { id:25, name:"Губки для посуды (5 шт)", category:"Кухня", price:120, oldPrice:null, brand:"ХозПром", volume:"—", material:"Поролон", color:"Разноцветный", country:"Россия", img:"images/25.jpg" },
+    { id:26, name:"Вакуумные пакеты 3 шт", category:"Хранение", price:550, oldPrice:650, brand:"ДомСтандарт", volume:"—", material:"Пластик", color:"Прозрачный", country:"Китай", img:"images/26.jpg" },
+    { id:27, name:"Бокс для хранения 30 л", category:"Хранение", price:950, oldPrice:null, brand:"ЧистоПласт", volume:"30 л", material:"Пластик", color:"Прозрачный", country:"Россия", img:"images/27.jpg" },
+    { id:28, name:"Корзина плетёная", category:"Хранение", price:780, oldPrice:900, brand:"ЭкоБыт", volume:"—", material:"Ротанг", color:"Коричневый", country:"Россия", img:"images/28.jpg" },
+    { id:29, name:"Полотенце кухонное", category:"Кухня", price:350, oldPrice:null, brand:"ДомСтандарт", volume:"—", material:"Хлопок", color:"Белый", country:"Китай", img:"images/29.jpg" },
+    { id:30, name:"Прихватка силиконовая", category:"Кухня", price:220, oldPrice:280, brand:"ХозПром", volume:"—", material:"Силикон", color:"Красный", country:"Россия", img:"images/30.jpg" }
 ];
 
 let cart = JSON.parse(localStorage.getItem('cart') || '[]');
@@ -340,7 +336,7 @@ function renderProducts() {
         <div class="product-card">
             ${discount > 0 ? `<span class="discount-badge">-${discount}%</span>` : ''}
             ${pop >= 5 ? `<span class="popular-badge">🔥 Популярный</span>` : ''}
-            <img src="${p.img}" alt="${p.name}" onclick="openProduct(${p.id})">
+            <img src="${p.img}" alt="${p.name}" onclick="openProduct(${p.id})" onerror="this.src='data:image/svg+xml,${encodeURIComponent('<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"300\" height=\"200\"><rect fill=\"#e0e0e0\" width=\"300\" height=\"200\"/><text x=\"150\" y=\"100\" text-anchor=\"middle\" fill=\"#999\" font-size=\"16\">Нет фото</text></svg>')}'">
             <h3 onclick="openProduct(${p.id})" style="cursor:pointer">${p.name}</h3>
             <p class="props">${p.brand} | ${p.category}</p>
             ${discount > 0 ? `<p class="old-price">${p.oldPrice} ₽</p>` : ''}
@@ -355,6 +351,7 @@ function openProduct(id) {
     currentProductId = id;
     const p = products.find(x => x.id === id);
     document.getElementById('productDetailImg').src = p.img;
+    document.getElementById('productDetailImg').onerror = function() { this.src = 'data:image/svg+xml,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="300" height="300"><rect fill="#e0e0e0" width="300" height="300"/><text x="150" y="150" text-anchor="middle" fill="#999" font-size="18">Нет фото</text></svg>'); };
     document.getElementById('productDetailName').textContent = p.name;
     document.getElementById('productDetailCategory').textContent = `Категория: ${p.category}`;
     document.getElementById('productDetailProps').innerHTML = `
