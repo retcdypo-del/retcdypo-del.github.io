@@ -2,10 +2,122 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Мой магазин</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ЧистоДом — товары для уюта и порядка</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: Arial, sans-serif; background: #f5f5f5; color: #333; }
+        header { background: #4a6741; color: white; padding: 20px; text-align: center; }
+        header h1 { font-size: 28px; }
+        nav { background: #3d5636; padding: 10px; text-align: center; }
+        nav a { color: white; text-decoration: none; margin: 0 15px; font-size: 16px; }
+        nav a:hover { text-decoration: underline; }
+        .hero { background: #e8f0e4; padding: 50px 20px; text-align: center; }
+        .hero h2 { font-size: 32px; margin-bottom: 10px; }
+        .hero p { font-size: 18px; margin-bottom: 20px; }
+        .btn { display: inline-block; background: #4a6741; color: white; padding: 12px 30px; text-decoration: none; border-radius: 5px; font-size: 16px; }
+        .container { max-width: 1100px; margin: 0 auto; padding: 20px; }
+        .categories { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-top: 30px; }
+        .category-card { background: white; padding: 30px; border-radius: 8px; text-align: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .category-card h3 { font-size: 20px; margin-bottom: 10px; }
+        .category-card p { color: #777; font-size: 14px; }
+        .products { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-top: 30px; }
+        .product-card { background: white; border-radius: 8px; padding: 20px; text-align: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .product-card img { width: 100%; height: 200px; object-fit: cover; border-radius: 5px; margin-bottom: 15px; background: #eee; }
+        .product-card h3 { font-size: 18px; margin-bottom: 5px; }
+        .product-card .price { font-size: 22px; font-weight: bold; color: #4a6741; margin: 10px 0; }
+        .order-form { background: white; padding: 30px; border-radius: 8px; margin-top: 40px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .order-form h2 { margin-bottom: 20px; }
+        .order-form input, .order-form select { width: 100%; padding: 12px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 5px; font-size: 16px; }
+        .order-form button { background: #4a6741; color: white; border: none; padding: 15px 40px; border-radius: 5px; font-size: 18px; cursor: pointer; width: 100%; }
+        .order-form button:hover { background: #3d5636; }
+        footer { background: #333; color: #aaa; text-align: center; padding: 20px; margin-top: 40px; }
+        footer a { color: #4a6741; }
+        @media (max-width: 600px) { .hero h2 { font-size: 24px; } }
+    </style>
 </head>
 <body>
-    <h1>Товары для дома</h1>
-    <p>Сайт в разработке</p>
+
+<header>
+    <h1>🧹 ЧистоДом</h1>
+    <p>Товары для уюта и порядка в доме</p>
+</header>
+
+<nav>
+    <a href="#catalog">Каталог</a>
+    <a href="#order">Заказать</a>
+    <a href="#contacts">Контакты</a>
+</nav>
+
+<section class="hero">
+    <h2>Всё для чистоты и уюта</h2>
+    <p>Контейнеры, органайзеры, средства для уборки — с доставкой по России</p>
+    <a href="#catalog" class="btn">Смотреть товары</a>
+</section>
+
+<div class="container" id="catalog">
+    <h2>Категории</h2>
+    <div class="categories">
+        <div class="category-card"><h3>🍳 Кухня</h3><p>Контейнеры, банки, органайзеры</p></div>
+        <div class="category-card"><h3>🛁 Ванная</h3><p>Дозаторы, полки, коврики</p></div>
+        <div class="category-card"><h3>🧽 Уборка</h3><p>Швабры, средства, салфетки</p></div>
+        <div class="category-card"><h3>📦 Хранение</h3><p>Боксы, корзины, вакуумные пакеты</p></div>
+    </div>
+
+    <h2 style="margin-top: 40px;">Популярные товары</h2>
+    <div class="products">
+        <div class="product-card">
+            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='200'%3E%3Crect fill='%23e0e0e0' width='300' height='200'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.3em' fill='%23999' font-size='18'%3EКонтейнер 1л%3C/text%3E%3C/svg%3E" alt="Контейнер">
+            <h3>Контейнер для хранения 1 л</h3>
+            <p>Пластиковый, с герметичной крышкой</p>
+            <p class="price">350 ₽</p>
+            <a href="#order" class="btn" onclick="document.getElementById('product').value='Контейнер для хранения 1 л — 350 ₽'">Заказать</a>
+        </div>
+
+        <div class="product-card">
+            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='200'%3E%3Crect fill='%23e0e0e0' width='300' height='200'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.3em' fill='%23999' font-size='18'%3EОрганайзер%3C/text%3E%3C/svg%3E" alt="Органайзер">
+            <h3>Органайзер для ящика</h3>
+            <p>Регулируемый разделитель</p>
+            <p class="price">420 ₽</p>
+            <a href="#order" class="btn" onclick="document.getElementById('product').value='Органайзер для ящика — 420 ₽'">Заказать</a>
+        </div>
+
+        <div class="product-card">
+            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='200'%3E%3Crect fill='%23e0e0e0' width='300' height='200'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.3em' fill='%23999' font-size='18'%3EДозатор%3C/text%3E%3C/svg%3E" alt="Дозатор">
+            <h3>Дозатор для жидкого мыла</h3>
+            <p>Керамический, 350 мл</p>
+            <p class="price">890 ₽</p>
+            <a href="#order" class="btn" onclick="document.getElementById('product').value='Дозатор для жидкого мыла — 890 ₽'">Заказать</a>
+        </div>
+
+        <div class="product-card">
+            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='200'%3E%3Crect fill='%23e0e0e0' width='300' height='200'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.3em' fill='%23999' font-size='18'%3EШвабра%3C/text%3E%3C/svg%3E" alt="Швабра">
+            <h3>Швабра отжимная</h3>
+            <p>С ведром в комплекте</p>
+            <p class="price">1490 ₽</p>
+            <a href="#order" class="btn" onclick="document.getElementById('product').value='Швабра отжимная — 1490 ₽'">Заказать</a>
+        </div>
+    </div>
+
+    <div class="order-form" id="order">
+        <h2>Оформление заказа</h2>
+        <form action="https://formspree.io/f/ТВОЙ_КОД" method="POST">
+            <input type="hidden" name="product" id="product" value="Товар не выбран">
+            <label>Ваше имя:</label>
+            <input type="text" name="name" placeholder="Иван Петров" required>
+            <label>Телефон:</label>
+            <input type="tel" name="phone" placeholder="+7 (999) 123-45-67" required>
+            <label>Email:</label>
+            <input type="email" name="email" placeholder="ivan@mail.ru" required>
+            <button type="submit">Отправить заказ</button>
+        </form>
+    </div>
+</div>
+
+<footer id="contacts">
+    <p>📞 Телефон: +7 (999) 123-45-67 | ✉️ Email: info@chistodom.ru</p>
+    <p>© 2026 ЧистоДом. Все права защищены.</p>
+</footer>
+
 </body>
 </html>
